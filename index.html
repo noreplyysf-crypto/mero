@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيد ميلاد سعيد</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #f472b6;
+    --purple: #a855f7;
+    --gold: #fbbf24;
+    --deep: #1a0033;
+    --soft: #fdf2ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--deep);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ===== PARTICLES ===== */
+  #particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0.4;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+
+  /* ===== PAGE SYSTEM ===== */
+  .page { display: none; min-height: 100vh; position: relative; z-index: 1; }
+  .page.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  /* ===== PAGE 1: CHOICE ===== */
+  #page1 {
+    padding: 2rem;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, #3d0066 0%, var(--deep) 70%);
+  }
+
+  .crown { font-size: 3rem; animation: bounce 1.5s ease-in-out infinite; display: block; margin-bottom: 1rem; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+  #page1 h1 {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, var(--pink) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .question {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 3rem;
+    font-weight: 500;
+  }
+
+  .choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+  }
+
+  .choice-btn {
+    font-family: 'Cairo', sans-serif;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .choice-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .choice-btn:hover::before { opacity: 1; }
+
+  .choice-btn.other {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    width: 130px;
+    height: 50px;
+  }
+
+  .choice-btn.youssef {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    width: 160px;
+    height: 60px;
+    box-shadow: 0 0 30px rgba(168,85,247,0.5);
+  }
+
+  .choice-btn.shrink1 { transform: scale(0.75); opacity: 0.35; pointer-events: none; }
+  .choice-btn.shrink2 { transform: scale(0.5); opacity: 0.15; pointer-events: none; }
+  .choice-btn.shrink3 { transform: scale(0.2); opacity: 0; pointer-events: none; width: 0 !important; padding: 0 !important; }
+
+  .choice-btn.youssef.big1 { font-size: 1.5rem; width: 200px; height: 75px; box-shadow: 0 0 50px rgba(168,85,247,0.7); }
+  .choice-btn.youssef.big2 { font-size: 1.9rem; width: 260px; height: 90px; box-shadow: 0 0 70px rgba(168,85,247,0.9); }
+  .choice-btn.youssef.big3 { font-size: 2.3rem; width: 320px; height: 110px; box-shadow: 0 0 100px rgba(240,114,182,1); }
+
+  /* ===== PAGE 2: CELEBRATION ===== */
+  #page2 {
+    padding: 2rem;
+    background: radial-gradient(ellipse at 50% 0%, #3d0066 0%, var(--deep) 60%);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: 900;
+    text-align: center;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 50%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%,100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  /* photos */
+  .photos-section {
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .photos-section h2 {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pink);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .photo-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .photo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(168,85,247,0.3);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .photo-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .photo-caption {
+    padding: 1rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+  }
+
+  .caption-highlight {
+    color: var(--pink);
+    font-weight: 700;
+  }
+
+  /* message */
+  .message-section {
+    width: 100%;
+    max-width: 750px;
+    margin-bottom: 4rem;
+  }
+
+  .message-card {
+    background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(244,114,182,0.15));
+    border: 1px solid rgba(244,114,182,0.3);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,114,182,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .message-title {
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .message-title span { font-size: 1.3rem; display: inline-block; animation: spin 3s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .message-body {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+  }
+
+  .message-body p { margin-bottom: 1rem; }
+  .message-body .highlight { color: var(--pink); font-weight: 700; font-size: 1.1rem; }
+  .message-body .gold { color: var(--gold); font-weight: 700; }
+
+  .signature {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--purple);
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  /* confetti burst */
+  .confetti-emoji {
+    position: fixed;
+    font-size: 2rem;
+    animation: burst 2s ease-out both;
+    pointer-events: none;
+    z-index: 999;
+  }
+  @keyframes burst {
+    0% { transform: translate(0,0) scale(0); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
+  }
+
+  .back-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.5);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+    align-self: flex-start;
+  }
+  .back-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+<!-- Floating particles -->
+<div id="particles"></div>
+
+<!-- PAGE 1: Choice -->
+<div class="page active" id="page1">
+  <span class="crown">👑</span>
+  <h1>كل سنة وانتِ طيبة يا اختي الغالية</h1>
+  <p class="question">قولي... اكتر أخ بتحبيه؟</p>
+  <div class="choices" id="choicesGrid">
+    <button class="choice-btn other" onclick="pick(this)" id="btn-m">محمد</button>
+    <button class="choice-btn other" onclick="pick(this)" id="btn-a">احمد</button>
+    <button class="choice-btn youssef" onclick="goToPage2()" id="btn-y">يوسف ✨</button>
+    <button class="choice-btn other" onclick="pick(this)" id="btn-n">ندي</button>
+  </div>
+</div>
+
+<!-- PAGE 2: Celebration -->
+<div class="page" id="page2">
+
+  <button class="back-btn" onclick="goBack()">← رجوع</button>
+
+  <div class="hero-title">🎂 كل سنة وانتِ طيبة! 🎂</div>
+  <p class="hero-sub">عارفة إنك هتختاري يوسف من الأول 😂💜</p>
+
+  <div class="photos-section">
+    <h2>💗 أجمل الذكريات 💗</h2>
+    <div class="photos-grid" id="photosGrid">
+      <!-- Photos generated by JS -->
+    </div>
+  </div>
+
+  <div class="message-section">
+    <div class="message-card">
+      <div class="message-title"><span>🌸</span> رسالة من القلب <span>🌸</span></div>
+      <div class="message-body">
+        <p>كل سنة وانتِ طيبة يا <span class="highlight">أحلى أخت في الدنيا</span> 🎂</p>
+        <p>ربنا يخليكِ لينا ويديكِ كل اللي قلبك بيتمناه 💜</p>
+        <p>وكل سنة وانتِ وـ<span class="highlight">خديجة</span> القمر بألف خير 🌸</p>
+      </div>
+      <div class="signature">من أخوكِ اللي بيحبك — يوسف 💜</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Particles
+const pEl = document.getElementById('particles');
+const colors = ['#f472b6','#a855f7','#fbbf24','#c084fc','#f9a8d4'];
+for(let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 8 + 4;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    background:${colors[Math.floor(Math.random()*colors.length)]};
+    left:${Math.random()*100}%;
+    animation-duration:${Math.random()*10+8}s;
+    animation-delay:${Math.random()*8}s;
+  `;
+  pEl.appendChild(p);
+}
+
+// Choice logic
+let clicks = 0;
+const shrinkLevels = ['shrink1', 'shrink2', 'shrink3'];
+const youssefBig = ['big1', 'big2', 'big3'];
+
+function pick(btn) {
+  clicks = Math.min(clicks + 1, 3);
+  document.querySelectorAll('.choice-btn.other').forEach(b => {
+    b.className = 'choice-btn other ' + shrinkLevels[clicks - 1];
+  });
+  const y = document.getElementById('btn-y');
+  y.className = 'choice-btn youssef ' + youssefBig[clicks - 1];
+}
+
+function goToPage2() {
+  // confetti burst
+  const emojis = ['🎉','🎊','💜','🌸','✨','🎂','💗','🎁'];
+  for(let i = 0; i < 20; i++) {
+    const e = document.createElement('div');
+    e.className = 'confetti-emoji';
+    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    const angle = Math.random() * 360;
+    const dist = Math.random() * 200 + 80;
+    e.style.cssText = `
+      left:${50 + Math.cos(angle)*20}vw;
+      top:${50 + Math.sin(angle)*20}vh;
+      --tx:${Math.cos(angle*Math.PI/180)*dist}px;
+      --ty:${Math.sin(angle*Math.PI/180)*dist}px;
+      animation-delay:${Math.random()*0.3}s;
+    `;
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 2500);
+  }
+
+  setTimeout(() => {
+    document.getElementById('page1').classList.remove('active');
+    const p2 = document.getElementById('page2');
+    p2.classList.add('active');
+    buildPhotos();
+    window.scrollTo({ top: 0 });
+  }, 400);
+}
+
+function goBack() {
+  document.getElementById('page2').classList.remove('active');
+  document.getElementById('page1').classList.add('active');
+  clicks = 0;
+  document.querySelectorAll('.choice-btn.other').forEach(b => b.className = 'choice-btn other');
+  document.getElementById('btn-y').className = 'choice-btn youssef';
+}
+
+// Build photos
+function buildPhotos() {
+  const grid = document.getElementById('photosGrid');
+  if(grid.children.length > 0) return;
+  const captions = [
+    'كل سنة وانتِ طيبة يا أحلى أخت في الدنيا 🎂',
+    'ربنا يخليكِ لينا دايمًا يا غالية ✨',
+    'كل سنة وانتِ بألف خير يا أختي الكبيرة 💜',
+    'سنة حلوة زيك يا <span class="caption-highlight">أم خديجة</span> 🌸',
+    'ربنا يكرمك ويفرّحك زي ما بتفرحينا 😊',
+    'كل سنة وانتِ أحلى وأحلى 🎉',
+    'يا أجمل أخت، كل سنة وانتِ طيبة 💗',
+    'سنة حلوة عليكِ وعلى <span class="caption-highlight">خديجة</span> القمر ✨',
+    'ربنا يديكِ كل اللي قلبك بيتمناه 🌺',
+    'كل سنة وانتِ بخير يا أختي الغالية 🎊',
+  ];
+  for(let i = 1; i <= 10; i++) {
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.style.animationDelay = (i * 0.08) + 's';
+    card.innerHTML = `
+      <img src="image/IMG${i}.jpg" alt="صورة ${i}" onerror="this.style.display='none'; this.nextSibling.style.paddingTop='2rem';">
+      <div class="photo-caption">${captions[i-1]}</div>
+    `;
+    grid.appendChild(card);
+  }
+}
+</script>
+</body>
+</html>
