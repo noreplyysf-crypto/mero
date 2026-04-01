@@ -447,7 +447,7 @@ function buildPhotos() {
     card.className = 'photo-card';
     card.style.animationDelay = (i * 0.08) + 's';
     card.innerHTML = `
-      <img src="image/IMG${i}.jpg" alt="صورة ${i}" onerror="this.style.display='none'; this.nextSibling.style.paddingTop='2rem';">
+      <img src="/IMG${i}.jpg" alt="صورة ${i}" onerror="this.style.display='none'; this.nextSibling.style.paddingTop='2rem';">
       <div class="photo-caption">${captions[i-1]}</div>
     `;
     grid.appendChild(card);
